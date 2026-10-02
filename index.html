@@ -7,70 +7,71 @@
 <meta name="description" content="Автосборка меню на неделю, список покупок и КБЖУ — без лишних раздумий.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FAF8F2;
+    --paper:#FFF8EF;
     --card:#FFFFFF;
-    --ink:#241F18;
-    --ink-soft:#716A5B;
-    --ink-faint:#A79E8B;
-    --line:#E7DFCC;
-    --accent:#C3752A;
-    --accent-ink:#3A2410;
-    --accent-soft:#F3E4CE;
-    --pine:#33573F;
-    --pine-soft:#E4EEE2;
-    --berry:#9B3B37;
-    --berry-soft:#F6E3DF;
-    --shadow:0 1px 2px rgba(36,31,24,0.06), 0 6px 16px rgba(36,31,24,0.06);
+    --ink:#2E2417;
+    --ink-soft:#8A7A64;
+    --ink-faint:#C4B6A0;
+    --line:#F2E4D0;
+    --accent:#FF7A4D;
+    --accent-ink:#5A2400;
+    --accent-soft:#FFE4D3;
+    --pine:#1F9A82;
+    --pine-soft:#DEF4EF;
+    --berry:#E8584F;
+    --berry-soft:#FDE6E2;
+    --shadow:0 2px 5px rgba(255,122,77,0.10), 0 10px 22px rgba(46,36,23,0.07);
     color-scheme:light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#19170F;
-      --card:#232019;
-      --ink:#F1ECDE;
-      --ink-soft:#B8AE98;
-      --ink-faint:#7E7562;
-      --line:#372F22;
-      --accent:#E29A52;
-      --accent-ink:#2B1B0B;
-      --accent-soft:#3A2B17;
-      --pine:#8DBB97;
-      --pine-soft:#223429;
-      --berry:#E08B85;
-      --berry-soft:#3A2420;
-      --shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+      --paper:#201A12;
+      --card:#2B2318;
+      --ink:#FBF2E7;
+      --ink-soft:#C9B8A0;
+      --ink-faint:#8C7A63;
+      --line:#3D3122;
+      --accent:#FF9466;
+      --accent-ink:#2A1200;
+      --accent-soft:#4A2A18;
+      --pine:#5FD1B4;
+      --pine-soft:#1D3A33;
+      --berry:#FF8178;
+      --berry-soft:#4A2420;
+      --shadow:0 2px 6px rgba(0,0,0,0.35), 0 12px 26px rgba(0,0,0,0.3);
       color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#19170F;
-    --card:#232019;
-    --ink:#F1ECDE;
-    --ink-soft:#B8AE98;
-    --ink-faint:#7E7562;
-    --line:#372F22;
-    --accent:#E29A52;
-    --accent-ink:#2B1B0B;
-    --accent-soft:#3A2B17;
-    --pine:#8DBB97;
-    --pine-soft:#223429;
-    --berry:#E08B85;
-    --berry-soft:#3A2420;
-    --shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+    --paper:#201A12;
+    --card:#2B2318;
+    --ink:#FBF2E7;
+    --ink-soft:#C9B8A0;
+    --ink-faint:#8C7A63;
+    --line:#3D3122;
+    --accent:#FF9466;
+    --accent-ink:#2A1200;
+    --accent-soft:#4A2A18;
+    --pine:#5FD1B4;
+    --pine-soft:#1D3A33;
+    --berry:#FF8178;
+    --berry-soft:#4A2420;
+    --shadow:0 2px 6px rgba(0,0,0,0.35), 0 12px 26px rgba(0,0,0,0.3);
     color-scheme:dark;
   }
   *{box-sizing:border-box;}
+  svg{stroke-linecap:round; stroke-linejoin:round;}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'Public Sans', system-ui, sans-serif;
+    font-family:'Nunito', system-ui, sans-serif;
     margin:0;
   }
-  h1,h2,h3{font-family:'Fraunces', Georgia, serif; font-weight:600; text-wrap:balance; margin:0;}
-  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums;}
+  h1,h2,h3{font-family:'Unbounded', system-ui, sans-serif; font-weight:700; text-wrap:balance; margin:0; letter-spacing:-0.01em;}
+  .mono{font-family:'Nunito', system-ui, sans-serif; font-weight:800; font-variant-numeric: tabular-nums;}
   #app-shell{
     max-width:480px;
     margin:0 auto;
@@ -111,7 +112,7 @@
   .card{
     background:var(--card);
     border:1px solid var(--line);
-    border-radius:16px;
+    border-radius:22px;
     padding:16px;
     box-shadow:var(--shadow);
   }
@@ -123,8 +124,8 @@
   input[type=text], input[type=number], select{
     font:inherit;
     padding:10px 12px;
-    border-radius:10px;
-    border:1px solid var(--line);
+    border-radius:13px;
+    border:1.5px solid var(--line);
     background:var(--paper);
     color:var(--ink);
     width:100%;
@@ -135,18 +136,18 @@
   }
   .btn{
     font:inherit;
-    font-weight:600;
-    border-radius:12px;
+    font-weight:700;
+    border-radius:16px;
     padding:12px 16px;
     border:1px solid transparent;
     cursor:pointer;
     text-align:center;
   }
-  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink); box-shadow:0 4px 12px rgba(255,122,77,0.3);}
   .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
   .btn-danger{background:var(--berry-soft); color:var(--berry);}
   .btn[disabled]{opacity:0.45; cursor:not-allowed;}
-  .btn-sm{padding:8px 12px; font-size:13px; border-radius:10px;}
+  .btn-sm{padding:8px 12px; font-size:13px; border-radius:13px;}
   .chip{
     display:inline-flex; align-items:center; gap:6px;
     padding:8px 12px; border-radius:999px;
@@ -154,14 +155,14 @@
     font-size:13px; cursor:pointer; color:var(--ink-soft);
     user-select:none;
   }
-  .chip.active{background:var(--accent-soft); border-color:var(--accent); color:var(--accent-ink); font-weight:600;}
+  .chip.active{background:var(--accent-soft); border-color:var(--accent); color:var(--accent-ink); font-weight:700;}
   .pill{
-    display:inline-flex; align-items:center; padding:3px 9px; border-radius:999px;
-    font-size:11px; font-weight:600; letter-spacing:.02em;
+    display:inline-flex; align-items:center; padding:3px 10px; border-radius:999px;
+    font-size:11px; font-weight:700; letter-spacing:.02em;
     background:var(--pine-soft); color:var(--pine);
   }
   .pill.warn{background:var(--berry-soft); color:var(--berry);}
-  .member-card{border:1px solid var(--line); border-radius:14px; padding:14px; background:var(--paper);}
+  .member-card{border:1px solid var(--line); border-radius:18px; padding:14px; background:var(--paper);}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .progress{height:4px; border-radius:2px; background:var(--line); overflow:hidden;}
   .progress > div{height:100%; background:var(--accent);}
@@ -179,67 +180,67 @@
   nav.tabbar button{
     background:none; border:none; cursor:pointer;
     display:flex; flex-direction:column; align-items:center; gap:3px;
-    color:var(--ink-faint); font-size:10px; font-family:inherit;
-    flex:1; padding:4px 2px;
+    color:var(--ink-faint); font-size:10px; font-weight:700; font-family:inherit;
+    flex:1; padding:6px 2px; border-radius:16px; margin:0 2px;
   }
   nav.tabbar button svg{width:20px; height:20px;}
-  nav.tabbar button.active{color:var(--accent);}
+  nav.tabbar button.active{color:var(--accent-ink); background:var(--accent-soft);}
   .empty{
     text-align:center; padding:40px 16px; color:var(--ink-faint);
   }
   .toast{
     position:fixed; left:50%; transform:translateX(-50%); bottom:90px;
-    background:var(--ink); color:var(--paper); padding:10px 16px; border-radius:10px;
-    font-size:13px; z-index:50; box-shadow:var(--shadow);
+    background:var(--ink); color:var(--paper); padding:10px 16px; border-radius:14px;
+    font-size:13px; font-weight:600; z-index:50; box-shadow:var(--shadow);
   }
   @media (max-width:420px){ .grid2{grid-template-columns:1fr;} }
 
   .daystrip{display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin:0 -2px;}
   .daystrip button{
-    flex:none; border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
-    border-radius:12px; padding:8px 12px; font:inherit; cursor:pointer; min-width:56px; text-align:center;
+    flex:none; border:1.5px solid var(--line); background:var(--card); color:var(--ink-soft);
+    border-radius:14px; padding:8px 12px; font:inherit; cursor:pointer; min-width:56px; text-align:center;
   }
-  .daystrip button.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600;}
-  .daystrip button .dnum{display:block; font-family:'IBM Plex Mono',monospace; font-size:15px;}
-  .slot-card{border:1px solid var(--line); border-radius:14px; padding:12px; background:var(--card); display:flex; gap:12px; align-items:center;}
+  .daystrip button.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:700;}
+  .daystrip button .dnum{display:block; font-family:'Nunito',sans-serif; font-weight:800; font-size:15px;}
+  .slot-card{border:1px solid var(--line); border-radius:18px; padding:12px; background:var(--card); display:flex; gap:12px; align-items:center;}
   .slot-card .meta{flex:1; min-width:0;}
-  .slot-type{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint);}
-  .slot-name{font-weight:600; margin-top:2px;}
+  .slot-type{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); font-weight:700;}
+  .slot-name{font-weight:700; margin-top:2px;}
   .slot-time{font-size:12px; color:var(--ink-soft); margin-top:2px;}
   .icon-btn{
-    border:1px solid var(--line); background:var(--paper); border-radius:10px; width:36px; height:36px;
+    border:1.5px solid var(--line); background:var(--paper); border-radius:13px; width:36px; height:36px;
     display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none; color:var(--ink-soft);
   }
   .icon-btn svg{width:17px; height:17px;}
   .balance-row{display:flex; align-items:center; gap:10px;}
-  .balance-track{flex:1; height:8px; border-radius:4px; background:var(--line); overflow:hidden;}
-  .balance-fill{height:100%; background:var(--pine);}
+  .balance-track{flex:1; height:9px; border-radius:999px; background:var(--line); overflow:hidden;}
+  .balance-fill{height:100%; background:var(--pine); border-radius:999px;}
   .balance-fill.over{background:var(--berry);}
   .macro-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center;}
-  .macro-grid .mval{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px;}
-  .macro-grid .mlabel{font-size:11px; color:var(--ink-faint);}
-  .gap-note{background:var(--berry-soft); color:var(--berry); border-radius:12px; padding:10px 12px; font-size:13px;}
+  .macro-grid .mval{font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; font-variant-numeric:tabular-nums;}
+  .macro-grid .mlabel{font-size:11px; color:var(--ink-faint); font-weight:600;}
+  .gap-note{background:var(--berry-soft); color:var(--berry); border-radius:16px; padding:10px 12px; font-size:13px;}
   .section-title{display:flex; align-items:center; justify-content:space-between;}
   .section-title h2{font-size:17px;}
   .search-input{position:relative;}
   .search-input input{padding-left:36px;}
   .search-input svg{position:absolute; left:11px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--ink-faint);}
-  .lib-card{border:1px solid var(--line); border-radius:14px; padding:12px; background:var(--card); display:flex; flex-direction:column; gap:6px; cursor:pointer; text-decoration:none; color:inherit;}
+  .lib-card{border:1px solid var(--line); border-radius:18px; padding:12px; background:var(--card); display:flex; flex-direction:column; gap:6px; cursor:pointer; text-decoration:none; color:inherit;}
   .lib-card .lib-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
-  .lib-card .lib-name{font-weight:600; color:var(--ink);}
+  .lib-card .lib-name{font-weight:700; color:var(--ink);}
   .lib-card .lib-meta{font-size:12px; color:var(--ink-soft);}
   .lib-actions{display:flex; gap:6px; flex:none;}
-  .star-btn, .eye-btn{border:none; background:none; cursor:pointer; color:var(--ink-faint); width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:8px;}
+  .star-btn, .eye-btn{border:none; background:none; cursor:pointer; color:var(--ink-faint); width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:10px;}
   .star-btn.active{color:var(--accent);}
   .eye-btn.active{color:var(--berry);}
   .star-btn svg, .eye-btn svg{width:18px; height:18px;}
   .shop-row{display:flex; align-items:center; gap:10px; padding:9px 2px; cursor:pointer; border-bottom:1px solid var(--line);}
   .shop-row:last-child{border-bottom:none;}
-  .shop-check{width:22px; height:22px; border-radius:7px; border:1.5px solid var(--line); flex:none; display:flex; align-items:center; justify-content:center; color:transparent;}
+  .shop-check{width:22px; height:22px; border-radius:9px; border:1.5px solid var(--line); flex:none; display:flex; align-items:center; justify-content:center; color:transparent;}
   .shop-row.checked .shop-check{background:var(--pine); border-color:var(--pine); color:var(--pine-soft);}
   .shop-row.checked .shop-name{color:var(--ink-faint); text-decoration:line-through;}
   .shop-name{flex:1; color:var(--ink);}
-  .shop-amount{font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-size:13px;}
+  .shop-amount{font-family:'Nunito',sans-serif; font-weight:800; color:var(--ink-soft); font-size:13px; font-variant-numeric:tabular-nums;}
   .prep-item{display:flex; justify-content:space-between; gap:10px; padding:8px 0; border-bottom:1px solid var(--line);}
   .prep-item:last-child{border-bottom:none;}
   .schedule-day{display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid var(--line);}
@@ -465,7 +466,7 @@ function memberCardHtml(m, showRemove){
   var maleSex = m.sex==='male';
   return (
     '<div class="row" style="justify-content:space-between; align-items:center;">'+
-      '<input type="text" value="'+escapeHtml(m.name)+'" data-f="name" style="font-weight:600; border:none; background:transparent; padding:4px 0; font-family:Fraunces,Georgia,serif; font-size:16px; flex:1; min-width:0;">'+
+      '<input type="text" value="'+escapeHtml(m.name)+'" data-f="name" style="font-weight:800; border:none; background:transparent; padding:4px 0; font-family:Unbounded,system-ui,sans-serif; font-size:15px; flex:1; min-width:0;">'+
       (showRemove ? '<button class="btn-sm btn-ghost" data-remove="1" style="border-radius:8px; flex:none;">Удалить</button>' : '')+
     '</div>'+
     '<div class="grid2">'+
@@ -790,10 +791,10 @@ function renderProfile(app){
 
   html += '<div class="card stack"><h2>Код переноса</h2>'+
     '<p>Скопируйте код и вставьте его на другом устройстве, чтобы перенести настройки и меню. Этот же код можно хранить как резервную копию.</p>'+
-    '<textarea id="export-code" readonly style="width:100%; min-height:90px; font-family:\'IBM Plex Mono\',monospace; font-size:11px; padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--paper); color:var(--ink); resize:vertical;">'+exportCode()+'</textarea>'+
+    '<textarea id="export-code" readonly style="width:100%; min-height:90px; font-family:\'IBM Plex Mono\',monospace; font-size:11px; padding:10px; border-radius:14px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); resize:vertical;">'+exportCode()+'</textarea>'+
     '<button class="btn btn-ghost btn-sm" id="copy-code">Скопировать код</button>'+
     '<hr class="hairline">'+
-    '<label class="field">Вставить код с другого устройства<textarea id="import-code" placeholder="Вставьте код сюда" style="width:100%; min-height:70px; font-family:\'IBM Plex Mono\',monospace; font-size:11px; padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--paper); color:var(--ink); resize:vertical;"></textarea></label>'+
+    '<label class="field">Вставить код с другого устройства<textarea id="import-code" placeholder="Вставьте код сюда" style="width:100%; min-height:70px; font-family:\'IBM Plex Mono\',monospace; font-size:11px; padding:10px; border-radius:14px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); resize:vertical;"></textarea></label>'+
     '<button class="btn btn-danger btn-sm" id="import-code-btn">Восстановить из кода</button>'+
     '</div>';
 
