@@ -995,7 +995,7 @@ var DISH_LIST = [
     [I('salmon',280),I('zucchini',200),I('bell_pepper',150),I('lemon',20),I('olive_oil',15)]),
   dish('m_lentil_soup','Чечевичный суп','main','legume',[],15,40,2,true,3,
     ['Лук, морковь и чеснок обжарить.','Добавить чечевицу, помидоры и воду, варить 25–30 минут.','Посолить и поперчить по вкусу.'],
-    [I('lentils',260),I('carrot',100),I('onion',100),I('tomato',160),I('garlic',10),I('olive_oil',10)]),
+    [I('lentils',340),I('carrot',100),I('onion',100),I('tomato',160),I('garlic',10),I('olive_oil',10)]),
   dish('m_pilaf_chicken','Плов с курицей','main','poultry',[],20,45,2,false,0,
     ['Куриное бедро обжарить с луком и морковью.','Добавить рис и воду, томить под крышкой 25 минут.','Дать настояться 10 минут.'],
     [I('chicken_thigh',300),I('rice',160),I('carrot',120),I('onion',80),I('garlic',10),I('sunflower_oil',20)]),
@@ -1007,7 +1007,7 @@ var DISH_LIST = [
     [I('beef_lean',300),I('potato',260),I('carrot',100),I('onion',80),I('tomato_paste',30)]),
   dish('m_bean_curry','Фасолевое карри','main','legume',[],15,30,2,false,0,
     ['Лук, имбирь и чеснок обжарить.','Добавить фасоль, помидоры и кокосовое молоко.','Тушить 15 минут.'],
-    [I('black_beans',260),I('coconut_milk',160),I('tomato',160),I('onion',80),I('garlic',10),I('ginger',10)]),
+    [I('black_beans',360),I('coconut_milk',160),I('tomato',160),I('onion',80),I('garlic',10),I('ginger',10)]),
   dish('m_cod_mash','Треска с картофельным пюре','main','fish',[],20,35,2,false,0,
     ['Треску отварить или обжарить на сковороде.','Картофель отварить, размять с молоком и маслом.','Стручковую фасоль отварить 5 минут.'],
     [I('cod',300),I('potato',260),I('green_beans',150),I('milk',60),I('butter',15),I('dill',10)]),
@@ -1034,7 +1034,7 @@ var DISH_LIST = [
     [I('chicken_breast',260),I('potato',220),I('hard_cheese',90),I('carrot',80),I('onion',60)]),
   dish('m_tofu_teriyaki','Тофу с овощами терияки','main','legume',[],15,20,2,false,0,
     ['Тофу обжарить кубиками до корочки.','Добавить брокколи и перец, обжарить 5 минут.','Влить соевый соус с мёдом, прогреть.'],
-    [I('tofu',300),I('broccoli',200),I('bell_pepper',150),I('soy_sauce',25),I('honey',10),I('garlic',10)]),
+    [I('tofu',420),I('broccoli',200),I('bell_pepper',150),I('soy_sauce',25),I('honey',10),I('garlic',10)]),
   dish('m_fish_cutlets','Рыбные котлеты с пюре','main','fish',[],25,40,2,false,0,
     ['Треску перемолоть или мелко порубить, смешать с яйцом и сухарями.','Сформировать котлеты, обжарить с двух сторон.','Подавать с картофельным пюре и фасолью.'],
     [I('cod',300),I('eggs',55),I('breadcrumbs',40),I('potato',300),I('green_beans',120),I('sour_cream',20)]),
@@ -1165,7 +1165,7 @@ function dishFlags(d){
             hasVeg:false, hasNut:false, hasEgg:false, hasFish:false, hasDairy:false, hasSoy:false, hasGluten:false };
   d.ing.forEach(function(it){
     var ing = INGREDIENTS[it.id], g = ing.group;
-    if(g==='poultry'||g==='meat'||g==='fish'||g==='egg'||g==='dairy') f.vegan=false;
+    if(g==='poultry'||g==='meat'||g==='fish'||g==='egg'||g==='dairy'||it.id==='honey') f.vegan=false;
     if(g==='poultry'||g==='meat'||g==='fish') f.vegetarian=false;
     if(g==='poultry'||g==='meat') f.pescatarian=false;
     if(ing.gluten){ f.glutenFree=false; f.hasGluten=true; }
@@ -1217,8 +1217,17 @@ var MEAL_SHARE = { breakfast:0.25, lunch:0.35, dinner:0.30, snack:0.10 };
 var SLOT_LABEL = { breakfast:'Завтрак', lunch:'Обед', dinner:'Ужин', snack:'Перекус' };
 var SLOT_ORDER = ['breakfast','lunch','dinner','snack'];
 
-function pickWeighted(list){
-  var weighted = list.map(function(d){ return [d, state.favorites.indexOf(d.id)>-1 ? 3 : 1]; });
+function preferAnimalProtein(){
+  var d = state.restrictions.diet;
+  return d.indexOf('vegetarian')===-1 && d.indexOf('vegan')===-1;
+}
+
+function pickWeighted(list, biasAwayFromLegume){
+  var weighted = list.map(function(d){
+    var w = state.favorites.indexOf(d.id)>-1 ? 3 : 1;
+    if(biasAwayFromLegume && d.mainProtein==='legume') w *= 0.45;
+    return [d, w];
+  });
   var total = weighted.reduce(function(s,p){ return s+p[1]; },0);
   var r = Math.random()*total;
   for(var i=0;i<weighted.length;i++){ r -= weighted[i][1]; if(r<=0) return weighted[i][0]; }
@@ -1270,7 +1279,7 @@ function generateWeek(){
         slots[slotKey] = null;
         return;
       }
-      var chosen = pickWeighted(chosenPool);
+      var chosen = pickWeighted(chosenPool, dishType==='main' && preferAnimalProtein());
       var slotTargetKcal = targets.kcal * (MEAL_SHARE[slotKey]/sumShare);
       var perServ = dishPerServing(chosen);
       var servings = Math.max(headcount, Math.round(slotTargetKcal / (perServ.kcal||1)));
@@ -1316,7 +1325,7 @@ function replaceDishInSlot(dayIndex, slotKey){
     return d.type===dishType && dishAllowed(d) && dishFitsTime(d, isWeekend) && (!current || d.id!==current.dishId);
   });
   if(!pool.length){ toast('Нет других подходящих блюд под текущие условия'); return; }
-  var chosen = pickWeighted(pool);
+  var chosen = pickWeighted(pool, dishType==='main' && preferAnimalProtein());
   var targets = menu.targets;
   var slotKeys = SLOT_ORDER.filter(function(k){ return state.meals[k]; });
   var sumShare = slotKeys.reduce(function(s,k){ return s+MEAL_SHARE[k]; },0) || 1;
